@@ -77,3 +77,16 @@ print(hello == hi)  # True
 # "========================================================="
 print("============논리 연산자=============")
 
+# 종류로는 and, or, not 이 있다.
+## and : 둘 다 True여야 True가 출력 된다. // 첫번째가 False라면 뒤에는 굳이 연산하지 않는다.
+print(5 == 5 and 7 == 7) # True + True = Ture
+print(5 == 7 and 7 == 7) # False 
+
+## or : 둘 중 하나라도 True일 경우 True가 출력 된다. // 첫번째가 True라면 뒤에는 굳이 연산하지 않는다.
+print(5 == 5 or 7 == 7) # True 
+print(5 == 7 or 7 == 7) # False + True = True
+
+### not : 값을 반대로 뒤집는다.
+print(not True) # False
+print(not 5 == 5) # False // 5==5 를 연산한 후 True를 출력해야하나, not으로 False가 반환되고, print로 출력됨.
+
