@@ -15,3 +15,24 @@ print("============실습 3=============")
 
 txt = "a,b,c,d"
 print(txt.find(",")) # 1
+
+# "========================================================="
+print("============예시 1=============")
+
+# SQE-008 설비에서 SQE 만 뽑아 내기
+str = "SQE-008"
+str_find = str.find("-")
+
+print(str_find) # 3
+print(str[:str_find]) # SQE
+
+str_index = str.index("-") 
+print(str[:str_index]) #SQE
+
+# "========================================================="
+print("============실습 4=============")
+
+file = "sensor_log.csv"
+
+print(file.startswith("sensor")) # True
+print(file.endswith(".csv")) #True
