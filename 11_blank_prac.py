@@ -44,7 +44,9 @@ text = "python"
 result = text[:2] + text[2].upper() + text[3:]
 print(result)  # pyThon
 
-# 
+# 소문자 t 를 대문자 T로 치환하는 방법
+text = text.replace("t","T") 
+print(text)
 
 # "========================================================="
 print("============실습 7============")
