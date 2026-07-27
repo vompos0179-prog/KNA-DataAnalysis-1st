@@ -36,7 +36,7 @@ print(low.startswith("sensor"))
 print(low.endswith(".csv"))
 
 # "========================================================="
-print("============실습 6============")
+print("============실습============")
 
 text = "python"
 
@@ -46,7 +46,7 @@ print(result)  # pyThon
 
 # 소문자 t 를 대문자 T로 치환하는 방법
 text = text.replace("t","T") 
-print(text)
+print(text) #pyThon
 
 # "========================================================="
 print("============실습 7============")
