@@ -1,5 +1,5 @@
 # =======================================
-print("==========tuple,set==========")
+print("==========tuple==========")
 
 # 기존 list의 가독성과 호환성이 불편해 tuple과 set이 생김.
 # 기본 구성 : ( ,)으로 데이터를 묶고 , 으로 여러형의 자료형의 값을 저장(, 는 마지막 값에 꼭 붙여야 한다.)
@@ -63,3 +63,111 @@ print("four:", four)
 # tuple 과 list의 가장 큰 차이점은 수정 가능성이다.
 ## tuple은 절대 수정이 불가하다. >> 이후 원본의 변경을 막는 기능이다.
 ## 따라서 내림차순, 오름차순, 뒤집기 등등 원본에 영향을 주는 메서드는 사용이 불가하다.(Error 발생)
+
+# =======================================
+print("==========tuple 활용==========")
+
+# len, .count, .index 활용이 가능하며, 원래 배운 기능과 똑같다.
+# 예시 1)
+tup = (
+    "normal",
+    "normal",
+    "warning",
+    "normal",
+    "warning",
+)
+print(len(tup))  # 5 (tup의 데이터 총 길이 = 총 갯수)
+print(tup.count("warning"))  # 2 (특정 데이터 갯수)
+print(tup.index("warning"))  # 2 (특정 데이터가 처음 등장하는 인덱스 번호)
+
+# =======================================
+print("==========tuple의 list==========")
+
+# list 내부의 tuple을 담은 것.
+# 접근 방식
+## list를 사용해서 list 내부에 접근하고, tuple에 담긴 정보를 사용 할 수 있음.(for문)
+## unpacking을 사용해서 tuple에 접근한다.
+
+# tuple의 반복문(for문)
+
+temps_13 = [
+    ("qox_001", 81),
+    ("qox_002", 88),
+    ("qox_003", 95),
+    ("qox_004", 89),
+]
+
+warning = 90
+
+for name, temp in temps_13:
+    if temp >= warning:
+        print("경고", name, "설비 온도 이상")
+
+## list 내부의 tuple 개수가 늘어나면 for문에서 변수를 여러개 작성하면 된다. (tuple 데이터 갯수 == for문 변수 갯수)
+
+tup_list = [
+    ("일", "one", 1, "1"),
+    ("이", "two", 2, "2"),
+]
+for kor_str, eng_str, num, num_str in tup_list:
+    print("kor_str:", kor_str, "eng_str:", eng_str, "num:", num, "num_str:", num_str)
+
+# list로 감싼 tuple은 차순이나 순서 뒤업기도 가능하다.(정렬 기준은 key라고 부른다.)
+## sorted()를 이용하여, 리스트의 튜플을 특정값으로 정렬이 가능하다. >> 리스트의 정렬된 데이터를 새 변수에 반환
+## 즉, 원본의 변경은 없으므로 리스트 내부의 튜플 정렬은 가능한 것이다.
+# 예시 2)
+temps_13 = [
+    (81, "qox_001"),
+    (88, "qox_002"),
+    (95, "qox_003"),
+    (89, "qox_004"),
+]
+hot = sorted(temps_13, reverse=True)
+print(hot)
+
+# =======================================
+print("==========실습 1==========")
+
+s1 = ("베어링진동", 0.8)
+print(s1)  # ('베어링진동', 0.8)
+
+print(s1[0])  # 베어링진동
+print(s1[1])  # 0.8
+
+name, value = s1
+print(name, value)  # 베어링진동, 0.8
+
+# =======================================
+print("==========실습 2==========")
+
+sensors = [("모터온도", 85), ("베어링진동", 0.4), ("펌프압력", 92), ("냉각수온도", 75)]
+
+for name, value in sensors:
+    print(name, value)
+
+limit = 90
+for name, value in sensors:
+    if value > limit:
+        print(name, "경고")
+
+# =======================================
+print("==========실습 3==========")
+
+sensors = [
+    ("모터온도", 85, (3, 5)),
+    ("베어링진동", 0.4, (8, 2)),
+    ("펌프압력", 92, (4, 8)),
+    ("냉각수온도", 75, (6, 1)),
+]
+
+for name, value, pos in sensors:
+    x, y = pos
+    print(name, "위치:", x, y)
+
+for name, value, pos in sensors:
+    x, y = pos
+    if x <= 5:
+        print(name)
+
+# =======================================
+print("==========set==========")
