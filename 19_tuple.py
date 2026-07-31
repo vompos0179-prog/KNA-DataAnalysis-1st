@@ -171,3 +171,68 @@ for name, value, pos in sensors:
 
 # =======================================
 print("==========set==========")
+
+# 데이터의 중복을 걸러주는 코드 (데이터를 합치는 과정, 재전송 등)
+# 기본 구조는 { }를 쓰거나 list 자체를 set( )으로 감싸도 된다. (이때, set( )은 내장 함수이다.)
+# 인덱스 번호가 부여되지 않는 코드이기 때문에 index가 작동하지 않는다. (Type Error 가 발생)
+
+# 기능 및 특징 : 자동 중복 제거, 순서(인덱스번호)가 없음
+
+# 빈 set 만들기
+empty_list = []  # 빈 리스트
+print(type(empty_list))  # class <list>
+empty_tuple = ()  # 빈 튜플
+print(type(empty_tuple))  # class <tuple>
+
+empty_set = {}  # 빈 중괄호는 딕셔너리 라는 다른 자료형으로 type이 나온다.
+print(type(empty_set))  # class <dict>
+# 따라서, 중괄호가 아닌 소괄호로 set()으로 해야 된다.
+real_empty_set = set()  # 빈 중괄호는 딕셔너리 라는 다른 자료형으로 type이 나온다.
+print(type(real_empty_set))  # class <set>
+
+# 값을 포함한 set 만들기(예시)
+logs = ["S01", "S02", "S01", "S03", "S01"]
+# unique = {logs}
+# print(type(logs)) >> Type Error 발생
+
+unique = set(logs)
+print(type(logs))  # class <set>
+print(
+    unique
+)  # {'S02', 'S03', 'S01'} >> 기존 중복되었던 "S01"은 한번만 출력되는걸 알 수 있다.
+
+# set에 여러 데이터 담기
+unique = set(["S01", "S02", "S01", "S03", "S01"])
+
+# set을 사용해서 list의 데이터 종류 수 를 알 수 있다.
+print(
+    len(unique)
+)  # 중복 데이터를 없애고, 서로 다른 데이터의 종류 값 갯수를 알 수 있다.
+
+# set에 값 추가하는 방법 : 이미 있는 값들은 무시되면서 새로운 값들만 추가된다.
+# 예시)
+alerts = {"S01", "S02"}
+alerts.add("S03")  # {"S01","S02","S03"}
+alerts.add(
+    "S01"
+)  # {"S01","S02","S03"} 기존에도 S01이 있었기 때문에 추가가 되지 않는다.
+
+# set에 특정 값 여부 확인.(in)
+##["S01", "S02", "S01", "S03", "S01"]
+##{"S01","S02","S03"}
+## 리스트와 set을 비교해보면 set의 길이가 짧음
+## 순회 속도가 list보다 빠름
+
+print("S01" in alerts)  # True
+if "S01" in alerts:
+    print("S01 정비필요!")
+
+# =======================================
+print("==========실습 4==========")
+
+logs = ["WOR01", "WOR06", "WOR01", "WOR06", "WOR01", "WOR01", "WOR03", "WOR05"]
+
+unique = set(logs)
+
+print(sorted(unique))
+print("종류 수:", len(unique))
