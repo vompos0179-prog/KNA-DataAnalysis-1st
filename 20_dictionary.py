@@ -71,6 +71,38 @@ print("==========items==========")
 
 # for key, value in sensors:
 #     print(key, value)  # TypeError: cannot unpack non-iterable str object // dictionary는 key값만 반복처리 가능하다.
-for key, value in sensors.items(): # key = name, value = data 와 같이 좀 더 직관적인 이름으로 설정한다.
+for (
+    key,
+    value,
+) in (
+    sensors.items()
+):  # key = name, value = data 와 같이 좀 더 직관적인 이름으로 설정한다.
     print(key, value)
-    
+
+# =======================================
+print("==========dictionary 예제==========")
+
+location_dict = {
+    "시": [
+        {"이름": "서울 특별시", "기초단체": ["종로구", "중구", "마포구"]},
+        {"이름": "대구 광역시", "기초단체": ["중구", "수성구", "달서구"]},
+    ],
+    "도": [
+        {"이름": "경기도", "기초단체": ["수원시", "안양시", "용인시"]},
+        {"이름": "경상북도", "기초단체": ["포항시", "경주시", "김천시"]},
+    ],
+}
+
+print(location_dict)
+
+print(location_dict["시"])
+print(location_dict["도"])
+
+for basic_dict in location_dict["시"]:
+    print(basic_dict["이름"], basic_dict["기초단체"])
+
+for basic_dict in location_dict["도"]:
+    print(basic_dict["이름"], basic_dict["기초단체"])
+
+## for문에 다른 코드(get) 등 을 쓰더라도 사실상 같은 일을 한다.
+## 그래서 중복되는 부분을 묶고, 다른점만 외부에서 지적해 시키면 돌아가는 함수(function)를 만들 수 있다. (함수화)
