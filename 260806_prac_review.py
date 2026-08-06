@@ -84,3 +84,42 @@ with open("result.csv", "w", encoding="utf-8", newline="") as f:
     # 데이터 작성
     writer.writerow(["홍길동", 90])
     writer.writerow(["김철수", 85])
+
+print("===============실습 6================")
+
+# csv 모듈 불러오기
+import csv
+
+# 조건을 만족하는 데이터를 저장할 리스트
+result = []
+
+# CSV 파일 열기
+with open("data/08_press.csv", "r", encoding="utf-8") as f:
+
+    # reader 객체 생성
+    reader = csv.reader(f)
+
+    # 첫 번째 줄(헤더) 저장
+    header = next(reader)
+
+    # 데이터 한 줄씩 반복
+    for row in reader:
+
+        # 전류 값을 실수형으로 변환
+        current = float(row[4])
+
+        # 전류가 90보다 크면 리스트에 저장
+        if current > 90:
+            result.append(row)
+
+# 결과를 새 CSV 파일로 저장
+with open("high_current.csv", "w", encoding="utf-8", newline="") as f:
+
+    # writer 객체 생성
+    writer = csv.writer(f)
+
+    # 헤더 저장
+    writer.writerow(header)
+
+    # 조건을 만족한 데이터 저장
+    writer.writerows(result)
