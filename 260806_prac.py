@@ -51,3 +51,26 @@ with open("result.csv", "w", encoding="utf-8", newline="") as f:
     writer.writerow(["이름", "점수"])
     writer.writerow(["홍길동", 90])
     writer.writerow(["김철수", 85])
+
+print("===============실습 6================")
+
+import csv
+
+result = []
+
+with open("data/08_press.csv", "r", encoding="utf-8") as f:
+    reader = csv.reader(f)
+
+    header = next(reader)
+
+    for row in reader:
+        current = float(row[4])
+
+        if current > 90:
+            result.append(row)
+
+with open("high_current.csv", "w", encoding="utf-8", newline="") as f:
+    writer = csv.writer(f)
+
+    writer.writerow(header)
+    writer.writerows(result)
