@@ -165,26 +165,37 @@ print(df_sensor.isna().sum())
 # 실습 6. describe()로 이상 신호 찾기
 # ============================================================
 
-print("\n" + "=" * 60)
+print("=" * 60)
 print("실습 6. describe()로 이상 신호 찾기")
 print("=" * 60)
 
-# 지하철 공기압축기 데이터 불러오기
+import pandas as pd
+
 df_compressor = pd.read_csv("data/12_metro_compressor.csv")
 
-print("\n[describe()]")
+print("[describe()]")
+
 print(df_compressor.describe())
 
-# 75%와 최대값 비교
 print("\n[75%와 최대값 비교]")
 
-# 숫자형 열만 선택
+
+# 숫자로 되어 있는 열만 선택한다.
+# 측정시각, 가동상태 같은 문자 데이터는 제외된다.
 numeric_data = df_compressor.select_dtypes(include="number")
 
+
+# 숫자형 열을 하나씩 확인한다.
 for column in numeric_data.columns:
 
+    # 75% 값을 구한다.
     q75 = numeric_data[column].quantile(0.75)
+
+    # 최대값을 구한다.
     max_value = numeric_data[column].max()
+
+    # 최대값과 75%의 차이를 구한다.
+    difference = max_value - q75
 
     print(
         column,
@@ -193,9 +204,79 @@ for column in numeric_data.columns:
         ", max:",
         round(max_value, 2),
         ", 차이:",
-        round(max_value - q75, 2),
+        round(difference, 2),
     )
 
+
+# ------------------------------------------------------------
+# 오일온도의 75%와 최대값 비교
+# ------------------------------------------------------------
+
+print("\n[오일온도 확인]")
+
+
+# 오일온도의 75% 값을 구한다.
+oil_q75 = df_compressor["오일온도"].quantile(0.75)
+
+# 오일온도의 최대값을 구한다.
+oil_max = df_compressor["오일온도"].max()
+
+# 75%와 최대값의 차이를 구한다.
+oil_difference = oil_max - oil_q75
+
+
+print("오일온도 75% :", round(oil_q75, 6))
+print("오일온도 최대값 :", round(oil_max, 6))
+print("오일온도 차이 :", round(oil_difference, 6))
+
+
+# 오일온도 평균은 63.181910
+# 오일온도 75% 값은 68.100000
+# 오일온도 최대값은 75.000000
+
+# 75%와 최대값의 차이:
+# 75.000000 - 68.100000 = 6.900000
+
+# 따라서 과제에서 75%와 최대값의 차이는 6.900000이다.
+
+print("\n[모터전류와 비교]")
+
+
+# 모터전류의 75% 값
+motor_q75 = df_compressor["모터전류"].quantile(0.75)
+
+# 모터전류의 최대값
+motor_max = df_compressor["모터전류"].max()
+
+# 75%와 최대값의 차이
+motor_difference = motor_max - motor_q75
+
+
+print("모터전류 75% :", round(motor_q75, 4))
+print("모터전류 최대값 :", round(motor_max, 2))
+print("모터전류 차이 :", round(motor_difference, 4))
+
+
+# 모터전류
+
+# 75% = 3.8125
+# 최대값 = 6.19
+
+# 차이: 6.19 - 3.8125 = 2.3775
+
+
+# ============================================================
+# [과제 제출용 최종 주석]
+# ============================================================
+
+# [실습 6 최종 해석]
+#
+# 오일온도의 최대값은 75.000000이다.
+# 오일온도의 75%는 68.100000이고
+
+# 75.000000 - 68.100000 = 6.900000
+
+# 모터전류는 75%가 3.8125이고, 최대값이 6.19로 차이는 약 2.38이다.
 
 # ============================================================
 # 실습 7. 통계량을 문장으로 묘사
@@ -294,7 +375,7 @@ print("\n" + "=" * 60)
 print("실습 9. 첫 탐색 종합")
 print("=" * 60)
 
-# 디지털 데이터 불러오기
+# 12_metro_digital.csv 버전
 df = pd.read_csv("data/12_metro_digital.csv")
 
 
@@ -327,7 +408,35 @@ df.info()
 print("\n[6. describe]")
 print(df.describe())
 
+# 12_metro_compressoor.csv 버전
+df_2 = pd.read_csv("data/12_metro_compressor.csv")
 
-print("\n" + "=" * 60)
-print("첫 탐색 완료")
-print("=" * 60)
+
+# 1. head
+print("\n[1. head]")
+print(df_2.head())
+
+
+# 2. shape
+print("\n[2. shape]")
+print(df_2.shape)
+
+
+# 3. columns
+print("\n[3. columns]")
+print(df_2.columns)
+
+
+# 4. dtypes
+print("\n[4. dtypes]")
+print(df_2.dtypes)
+
+
+# 5. info
+print("\n[5. info]")
+df_2.info()
+
+
+# 6. describe
+print("\n[6. describe]")
+print(df_2.describe())
