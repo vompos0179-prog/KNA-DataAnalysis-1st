@@ -1,3 +1,7 @@
+import pandas as pd
+
+df = pd.read_csv("data/13_diecasting_shot.csv", encoding="utf-8-sig")
+
 # ============================================================
 # 실습 5. 위험 순으로 정렬하기
 # ============================================================
@@ -45,74 +49,6 @@ print("불량 데이터 중 비스킷두께가 큰 상위 5개")
 print(danger)
 
 print()
-
-
-# ============================================================
-# 실습 7. 이상 의심 설비 리포트
-# ============================================================
-
-print("=" * 60)
-print("실습 7. 이상 의심 설비 리포트")
-print("=" * 60)
-
-# 비스킷두께가 13 이상이고
-# 사이클타임이 25 이상인 위험 데이터를 선택
-risk = df[(df["비스킷두께"] >= 13) & (df["사이클타임"] >= 25)].sort_values(
-    "비스킷두께", ascending=False
-)
-
-# 필요한 주요 열만 선택
-risk_report = risk[["샷", "비스킷두께", "사이클타임", "품질등급"]]
-
-print("위험 설비 데이터")
-print(risk_report)
-
-print()
-print("위험 데이터 개수:", len(risk_report))
-
-# 가장 위험한 데이터 확인
-if len(risk_report) > 0:
-
-    most_dangerous = risk_report.iloc[0]
-
-    print()
-    print("가장 위험한 샷")
-    print("샷 번호:", most_dangerous["샷"])
-    print("비스킷두께:", most_dangerous["비스킷두께"])
-    print("사이클타임:", most_dangerous["사이클타임"])
-    print("품질등급:", most_dangerous["품질등급"])
-
-print()
-
-
-# ============================================================
-# 주조 로그 불량 데이터 분석
-# ============================================================
-
-print("=" * 60)
-print("주조 로그 불량 데이터 분석")
-print("=" * 60)
-
-# 작은 데이터 파일 불러오기
-df_small = pd.read_csv("data/13_diecasting_small.csv", encoding="utf-8-sig")
-
-print("작은 데이터")
-print(df_small.head())
-print()
-
-
-# 불량 데이터만 선택
-small_bad = df_small[df_small["품질등급"] == "불량"]
-
-# 비스킷두께가 큰 순서대로 정렬
-small_bad = small_bad.sort_values("비스킷두께", ascending=False)
-
-print("불량 데이터")
-print(small_bad)
-
-print()
-print("불량 데이터 개수:", len(small_bad))
-
 
 # ============================================================
 # 실습 끝
